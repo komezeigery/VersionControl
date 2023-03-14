@@ -25,15 +25,65 @@ namespace ExcelCreation
         Excel.Application xlApp;
         Excel.Workbook xlWB;
         Excel.Worksheet xlSheet;
+       
+
         public Form1()
         {
             InitializeComponent();
             LoadData();
             CreateExcel();
         }
-        public Form1()
+
+        void CreateExcel()
         {
-            InitializeComponent();
+            try
+            {
+                xlApp = new Excel.Application();
+                xlWB = xlApp.Workbooks.Add(Missing.Value);
+                xlSheet = xlWB.ActiveSheet;
+
+                CreateTable();
+
+                xlApp.Visible = true;
+                xlApp.UserControl = true;
+            }
+            catch (Exception ex)
+            {
+                string errMsg = string.Format("Error: {0}\nLine: {1}", ex.Message, ex.Source);
+                MessageBox.Show(errMsg, "Error");
+
+                xlWB.Close(false, Type.Missing, Type.Missing);
+                xlApp.Quit();
+                xlWB = null;
+                xlApp = null;
+            }
+
+        }
+
+        void CreateTable()
+        {
+            string[] headers = new string[]
+           {
+                "Kód",
+                "Eladó",
+                "Oldal",
+                "Kerület",
+                "Lift",
+                "Szobák száma",
+                "Alapterület (m2)",
+                "Ár (mFt)",
+                "Négyzetméter ár (mFt/m2)"
+
+           };
+            for (int i = 0; i < headers.Length; i++)
+            {
+                xlSheet.Cells[1, i + 1] = headers[i];
+            }
+        }
+
+        private void LoadData()
+        {
+            flats = context.Flat.ToList();
         }
     }
 }
