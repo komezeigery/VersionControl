@@ -30,12 +30,46 @@ namespace Fejlesztesi_Mintak2
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            this.mainPanel = new System.Windows.Forms.Panel();
+            this.createTimer = new System.Windows.Forms.Timer(this.components);
+            this.conveyerTimer = new System.Windows.Forms.Timer(this.components);
+            this.SuspendLayout();
+            // 
+            // mainPanel
+            // 
+            this.mainPanel.Location = new System.Drawing.Point(13, 13);
+            this.mainPanel.Name = "mainPanel";
+            this.mainPanel.Size = new System.Drawing.Size(762, 324);
+            this.mainPanel.TabIndex = 0;
+            this.mainPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // createTimer
+            // 
+            this.createTimer.Interval = 30;
+            this.createTimer.Tick += new System.EventHandler(this.createTimer_Tick);
+            // 
+            // conveyerTimer
+            // 
+            this.conveyerTimer.Interval = 10;
+            this.conveyerTimer.Tick += new System.EventHandler(this.conveyerTimer_Tick);
+            // 
+            // Form1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.mainPanel);
+            this.Name = "Form1";
             this.Text = "Form1";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private System.Windows.Forms.Panel mainPanel;
+        private System.Windows.Forms.Timer createTimer;
+        private System.Windows.Forms.Timer conveyerTimer;
     }
 }
 
