@@ -12,7 +12,8 @@ namespace Fejlesztesi_Mintak2.Entities
     {
         protected override void DrawImage(Graphics g)
         {
-           
+            Image imageFile = Image.FromFile(@"Images/car.png");
+            g.DrawImage(imageFile, 0, 0, Width, Height);
         }
     }
 }
